@@ -1,4 +1,5 @@
 ﻿using System;
+using TicTacToe.Classes;
 
 namespace TicTacToe
 {
@@ -22,6 +23,22 @@ namespace TicTacToe
                 }
 
 
+                switch(menuOptionSelected)
+                {
+                    case 1:
+                        Console.Clear();
+                        Player.CreateNewPlayer(1);
+                        Player.CreateNewPlayer(2);
+                        GameBoard.PrintBoard();
+                        break;
+                    case 2:
+                        Console.Clear();
+                        Game.PrintAllWinningSolutions();
+                        break;
+                    case 3:
+                        Environment.Exit(0);
+                        break;
+                }
             } while (menuOptionSelected != 3);
         }
         // End of Main
@@ -59,5 +76,6 @@ namespace TicTacToe
 
             return 0;
         }
+
     }
 }
