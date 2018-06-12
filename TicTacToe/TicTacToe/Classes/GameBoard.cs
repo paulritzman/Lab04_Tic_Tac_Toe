@@ -14,21 +14,5 @@ namespace TicTacToe.Classes
             { "7", "8", "9" },
         };
 
-        public static void PrintBoard()
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    Console.Write($"|{Board[i, j]}|");
-                }
-                Console.WriteLine();
-            }
-
-            Console.WriteLine();
-        }
-
-
-
     }
 }

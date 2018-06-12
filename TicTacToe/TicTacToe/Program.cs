@@ -17,26 +17,34 @@ namespace TicTacToe
                 menuOptionSelected = 0;
                 while (menuOptionSelected == 0)
                 {
+                    Console.Clear();
                     PrintMainMenu();
                     menuInput = Console.ReadLine();
                     menuOptionSelected = MainMenuSelection(menuInput);
                 }
 
-
                 switch(menuOptionSelected)
                 {
                     case 1:
                         Console.Clear();
-                        Player.CreateNewPlayer(1);
-                        Player.CreateNewPlayer(2);
-                        GameBoard.PrintBoard();
+                        Player playerOne = Game.CreatePlayers(1, "X");
+                        Player playerTwo = Game.CreatePlayers(2, "O");
+                        Game.PrintPlayerGreeting(playerOne, playerTwo);
+                        Game.PrintBoard();
                         break;
                     case 2:
                         Console.Clear();
                         Game.PrintAllWinningSolutions();
+                        Console.Write("\nPress any key to return to the main menu...");
+                        Console.ReadKey();
+                        Console.Clear();
                         break;
                     case 3:
                         Environment.Exit(0);
+                        break;
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("Your selection did not match one of the options below...\n");
                         break;
                 }
             } while (menuOptionSelected != 3);
@@ -75,7 +83,6 @@ namespace TicTacToe
             }
 
             return 0;
-        }
-
+        }    
     }
 }
