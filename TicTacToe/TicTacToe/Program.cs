@@ -27,9 +27,8 @@ namespace TicTacToe
                 {
                     case 1:
                         Console.Clear();
-                        Player.CreateNewPlayer(1);
-                        Player.CreateNewPlayer(2);
-                        GameBoard.PrintBoard();
+                        CreatePlayers();
+                        PrintBoard();
                         break;
                     case 2:
                         Console.Clear();
@@ -76,6 +75,81 @@ namespace TicTacToe
 
             return 0;
         }
+
+        private static void CreatePlayers()
+        {
+            string chosenName = "";
+            uint playerToSet = 1;
+            bool inputIsValid = false;
+
+            while (!inputIsValid && playerToSet <= 2)
+            {
+                inputIsValid = false;
+                chosenName = "";
+
+                Console.Clear();
+
+                Console.Write($"\tHello Player {playerToSet}!\n\n Please enter your name: ");
+                chosenName = Console.ReadLine();
+                inputIsValid = VerifyNewPlayerName(chosenName);
+
+                if (inputIsValid && playerToSet == 1)
+                {
+                    Player playerOne = new Player(chosenName, "X", false);
+                    playerToSet++;
+                    inputIsValid = false;
+                }
+                else if (inputIsValid && playerToSet == 2)
+                {
+                    Player playerTwo = new Player(chosenName, "O", false);
+                    playerToSet++;
+                }
+            }
+
+            Console.Clear();
+        }
+
+        public static bool VerifyNewPlayerName(string nameInput)
+        {
+            if (nameInput.Length == 0)
+            {
+                return false;
+            }
+
+            try
+            {
+                foreach (char c in nameInput.ToCharArray())
+                {
+                    if (!(c >= 65 && c <= 90) && !(c >= 97 && c <= 122))
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Clear();
+                Console.WriteLine($"Unable to create player with that name: {e.Message}");
+                return false;
+            }
+        }
+
+        public static void PrintBoard()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    Console.Write($"|{GameBoard.Board[i, j]}|");
+                }
+                Console.WriteLine();
+            }
+
+            Console.WriteLine();
+        }
+
+
 
     }
 }
