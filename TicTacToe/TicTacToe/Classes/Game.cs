@@ -34,9 +34,11 @@ namespace TicTacToe.Classes
                 }
                 cellSelection = Console.ReadLine();
                 turnsTaken++;
-
-
             }
+
+            Console.WriteLine("Winner!");
+            Console.Write("\nPress any key to return to the main menu...");
+            Console.ReadKey();
         }
         
         public static int[][] Winners = new int[][]
