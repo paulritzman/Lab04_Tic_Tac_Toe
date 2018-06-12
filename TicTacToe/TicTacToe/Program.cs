@@ -27,10 +27,7 @@ namespace TicTacToe
                 {
                     case 1:
                         Console.Clear();
-                        Player playerOne = Game.CreatePlayers(1, "X");
-                        Player playerTwo = Game.CreatePlayers(2, "O");
-                        Game.PrintPlayerGreeting(playerOne, playerTwo);
-                        Game.PrintBoard();
+                        Game.PlayGame();
                         break;
                     case 2:
                         Console.Clear();

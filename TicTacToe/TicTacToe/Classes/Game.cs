@@ -6,6 +6,39 @@ namespace TicTacToe.Classes
 {
     class Game
     {
+        public static void PlayGame()
+        {
+            Player playerOne = Game.CreatePlayers(1, "X");
+            Player playerTwo = Game.CreatePlayers(2, "O");
+            Game.PrintPlayerGreeting(playerOne, playerTwo);
+
+            playerOne.IsTurn = true;
+            uint turnsTaken = 0;
+            string cellSelection = "";
+
+            while (turnsTaken < 9)
+            {
+                Console.Clear();
+                Console.WriteLine($"Total turns taken: {turnsTaken}\n");
+                GameBoard.PrintBoard();
+
+                if (playerOne.IsTurn)
+                {
+                    Console.WriteLine($"It's your turn: {playerOne.Name}. Where would you like to place an \"{playerOne.Marker}\"?");
+                    playerOne.IsTurn = false;
+                }
+                else
+                {
+                    Console.WriteLine($"It's your turn: {playerTwo.Name}. Where would you like to place an \"{playerTwo.Marker}\"?");
+                    playerOne.IsTurn = true;
+                }
+                cellSelection = Console.ReadLine();
+                turnsTaken++;
+
+
+            }
+        }
+        
         public static int[][] Winners = new int[][]
         {
             // horizontal
@@ -43,20 +76,6 @@ namespace TicTacToe.Classes
                 }
                 Console.WriteLine();
             }
-            Console.WriteLine();
-        }
-
-        public static void PrintBoard()
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    Console.Write($"|{GameBoard.Board[i, j]}|");
-                }
-                Console.WriteLine();
-            }
-
             Console.WriteLine();
         }
 
