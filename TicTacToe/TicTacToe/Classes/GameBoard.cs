@@ -14,9 +14,5 @@ namespace TicTacToe.Classes
             { "7", "8", "9" },
         };
 
-        
-
-
-
     }
 }

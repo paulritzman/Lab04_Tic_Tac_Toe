@@ -17,25 +17,34 @@ namespace TicTacToe
                 menuOptionSelected = 0;
                 while (menuOptionSelected == 0)
                 {
+                    Console.Clear();
                     PrintMainMenu();
                     menuInput = Console.ReadLine();
                     menuOptionSelected = MainMenuSelection(menuInput);
                 }
 
-
                 switch(menuOptionSelected)
                 {
                     case 1:
                         Console.Clear();
-                        CreatePlayers();
-                        PrintBoard();
+                        Player playerOne = Game.CreatePlayers(1, "X");
+                        Player playerTwo = Game.CreatePlayers(2, "O");
+                        Game.PrintPlayerGreeting(playerOne, playerTwo);
+                        Game.PrintBoard();
                         break;
                     case 2:
                         Console.Clear();
                         Game.PrintAllWinningSolutions();
+                        Console.Write("\nPress any key to return to the main menu...");
+                        Console.ReadKey();
+                        Console.Clear();
                         break;
                     case 3:
                         Environment.Exit(0);
+                        break;
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("Your selection did not match one of the options below...\n");
                         break;
                 }
             } while (menuOptionSelected != 3);
@@ -74,82 +83,6 @@ namespace TicTacToe
             }
 
             return 0;
-        }
-
-        private static void CreatePlayers()
-        {
-            string chosenName = "";
-            uint playerToSet = 1;
-            bool inputIsValid = false;
-
-            while (!inputIsValid && playerToSet <= 2)
-            {
-                inputIsValid = false;
-                chosenName = "";
-
-                Console.Clear();
-
-                Console.Write($"\tHello Player {playerToSet}!\n\n Please enter your name: ");
-                chosenName = Console.ReadLine();
-                inputIsValid = VerifyNewPlayerName(chosenName);
-
-                if (inputIsValid && playerToSet == 1)
-                {
-                    Player playerOne = new Player(chosenName, "X", false);
-                    playerToSet++;
-                    inputIsValid = false;
-                }
-                else if (inputIsValid && playerToSet == 2)
-                {
-                    Player playerTwo = new Player(chosenName, "O", false);
-                    playerToSet++;
-                }
-            }
-
-            Console.Clear();
-        }
-
-        public static bool VerifyNewPlayerName(string nameInput)
-        {
-            if (nameInput.Length == 0)
-            {
-                return false;
-            }
-
-            try
-            {
-                foreach (char c in nameInput.ToCharArray())
-                {
-                    if (!(c >= 65 && c <= 90) && !(c >= 97 && c <= 122))
-                    {
-                        return false;
-                    }
-                }
-                return true;
-            }
-            catch (Exception e)
-            {
-                Console.Clear();
-                Console.WriteLine($"Unable to create player with that name: {e.Message}");
-                return false;
-            }
-        }
-
-        public static void PrintBoard()
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    Console.Write($"|{GameBoard.Board[i, j]}|");
-                }
-                Console.WriteLine();
-            }
-
-            Console.WriteLine();
-        }
-
-
-
+        }    
     }
 }

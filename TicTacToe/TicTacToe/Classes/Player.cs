@@ -16,6 +16,5 @@ namespace TicTacToe.Classes
             Marker = marker;
             IsTurn = isTurn;
         }
-
     }
 }
